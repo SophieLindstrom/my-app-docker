@@ -10,7 +10,7 @@ button
   
 }
 
-.input{
+input{
   width: 15%;
   padding: 10px 20px;
   margin: 8px 0;
@@ -19,7 +19,7 @@ button
   background-color: rgb(231, 231, 231);
   margin-left: 5px
 }
-.input:focus{
+input:focus{
   background-color: greenyellow;
   
 }

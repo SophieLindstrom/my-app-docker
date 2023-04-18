@@ -19,14 +19,14 @@ export default function App() {
       <form onSubmit={submit}>
         <div>
           <label className='label'>Enter first name</label>
-          <input className='input'
+          <input required 
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
         <div>
           <label className='label'>Enter last name</label>
-          <input className='input'
+          <input required
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
