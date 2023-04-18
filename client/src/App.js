@@ -5,14 +5,24 @@ export default function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [message, setMessages] = useState("");
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const formValid = firstName.length > 0 && lastName.length > 0;
     if (!formValid) {
       return;
     }
-    setMessages(`Hello and welcome to Apendo, ${firstName} ${lastName}!`);
+    
+
+    const nameData = {firstName, lastName};
+    const nameDataJson = JSON.stringify(nameData);
+
+    const res = await fetch('http://localhost:4000/hello?firstName='+firstName+'&lastName='+lastName);
+
+    const json = await res.json();
+
+    setMessages(json.message);
   };
+
   return (
     <div>
       <h1>Welcome to Apendo!</h1>
