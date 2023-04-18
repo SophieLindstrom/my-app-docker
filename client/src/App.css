@@ -5,6 +5,7 @@ button
 {
   background-color: greenyellow;
   border-radius: 4px;
+  margin-left: 10px;
   
 }
 
@@ -16,6 +17,10 @@ button
   border-radius: 10px;
   background-color: rgb(231, 231, 231);
   margin-left: 5px
+}
+.input:focus{
+  background-color: greenyellow;
+  
 }
 
 .label{

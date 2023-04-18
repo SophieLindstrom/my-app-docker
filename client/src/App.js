@@ -31,7 +31,7 @@ export default function App() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <button className='label' type="submit">Submit</button>
+        <button type="submit">Submit</button>
       </form>
       {message}
     </div>
