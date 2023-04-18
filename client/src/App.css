@@ -1,6 +1,12 @@
 .App {
   text-align: center;
 }
+button 
+{
+  background-color: greenyellow;
+  border-radius: 4px;
+  
+}
 
 .input{
   width: 15%;
