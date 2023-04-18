@@ -18,3 +18,4 @@ app.get('/lol', (req, res) =>{
 app.listen(port, () =>
   console.log(`Server ts running on port ${port}, http://localhost:${port}`)
 );
+
