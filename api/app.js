@@ -27,9 +27,6 @@ app.get('/hello', function(req, res){
   res.send(JSON.stringify({ message: greeting }));
 });
 
-app.get('/lol', (req, res) =>{
-  res.send('Hello hello lollolo');
-});
 app.listen(port, () =>
   console.log(`Server ts running on port ${port}, http://localhost:${port}`)
 );
