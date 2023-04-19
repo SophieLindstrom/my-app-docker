@@ -7,6 +7,11 @@ export default function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [message, setMessages] = useState("");
+  const [isliked, setLiked] = useState(false);
+
+  const buttonHandler = () => {
+    setLiked((currentState) => !currentState);
+  };
    // Deklarera en funktion som körs när användaren klickar på "Submit"-knappen
   const submit = async (e) => {
     e.preventDefault(); // Förhindra att formuläret skickas iväg och att sidan laddas om
@@ -52,7 +57,7 @@ export default function App() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button onClick={buttonHandler}style={{ backgroundColor: isliked ? "pink" : "lightgrey" }} type="submit">Submit</button>
       </form>
       {message}
     </div>
