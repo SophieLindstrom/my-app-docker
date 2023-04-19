@@ -1,7 +1,7 @@
 # my-app-docker
  
 # Beskrivning
-Det här är en Node.js Express-applikation som lyssnar på en serverport och har en definierad endpoint ("/hello").Vi använder app.use() för att ange att appen ska använda JSON-format för inkommande data. Därefter används en middleware-funktion(bla. Access-Control-Allow-Origon) för att sätta HTTP-headers som tillåter cross-origin resursdelning (CORS). Endpointen ("/hello") tar emot en GET-förfrågan som innehåller två query-parametrar, firstName och lastName. De används för att bygga upp ett personligt hälsningsmeddelande som skickas som JSON tillbaka till klienten.
+Det här är en Node.js Express-applikation som har en definierad endpoint ("/hello"). Endpointen ("/hello") tar emot en GET-förfrågan som kräver två query-parametrar, firstName och lastName. De används för att bygga upp ett personligt hälsningsmeddelande som skickas som ett JSON-objekt (med ett fält som heter message med ett hälsningsmeddelande) tillbaka till klienten.
 
 # Installation
 1.Ladda ner Visual Studio Code länk: https://code.visualstudio.com/download
