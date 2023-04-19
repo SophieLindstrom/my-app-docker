@@ -42,24 +42,26 @@ export default function App() {
 
   // Rendera ett formulär och hälsningsmeddelande på sidan
   return (
-    <div>
+    <div className='container'>
       <h1>Welcome to Apendo!</h1>
       <form onSubmit={submit}>
         <div>
-          <label className='label'>Enter first name</label>
+          <label>Enter first name</label>
           <input required
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
         <div>
-          <label className='label'>Enter last name</label>
+          <label>Enter last name</label>
           <input required
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
+        <div className='buttonClass'>
         <button style={{ backgroundColor: isSuccessful ? "pink" : "lightgrey" }} type="submit">Submit</button>
+        </div>
       </form>
       {message}
     </div>

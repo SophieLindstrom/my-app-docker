@@ -1,16 +1,25 @@
+
+.container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .App {
   text-align: center;
 }
-button 
-{
+button{
   border-radius: 4px; 
   padding: 5px;
-  margin-left: 10px;
-  
+}
+.buttonClass 
+{
+ display: block;
+ text-align: right;
+ 
 }
 
 input{
-  width: 15%;
   padding: 10px 20px;
   margin: 8px 0;
   box-sizing: border-box;
