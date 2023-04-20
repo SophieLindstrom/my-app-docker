@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 const port = process.env.PORT || 4000;
 
 app.get('/', (req, res) =>{
-  res.send('Hello from praktikanterna ts');
+  res.send('Hello from praktikanterna');
 });
 
 app.get('/hello', function(req, res){

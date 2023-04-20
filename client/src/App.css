@@ -9,8 +9,15 @@
   text-align: center;
 }
 button{
-  border-radius: 4px; 
-  padding: 5px;
+  background: #fff;
+    font-size: 25px;
+    padding: 10px 30px;
+    color: #000;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0px #000000;
+    border-radius: 10px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: bold;
 }
 .buttonClass 
 {
@@ -20,16 +27,23 @@ button{
 }
 
 input{
-  padding: 10px 10px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border-radius: 10px;
-  background-color: rgb(231, 231, 231);
-  margin-left: 5px
+  padding: 20px 30px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: rgb(231, 231, 231);
+    margin-left: 5px;
+    border: 2px solid #7ac142;
+    box-shadow: 3px 3px 0px #7ac142;
+    font-size: 20px;
+    font-family: 'Work Sans', sans-serif;
 }
 input:focus{
   background-color: lightgray;
   
+}
+.input-wrapper{
+  margin-bottom: 10px;
 }
 
 .label{
@@ -39,6 +53,7 @@ input:focus{
 h1{
   margin-left: 10px;
   color: white;
+  font-size: 40px;
 }
 
 .header-logo{

@@ -68,6 +68,7 @@ export default function App() {
     <div className='container'>
       <h1>Welcome! </h1>
       <form onSubmit={submit}>
+        <div className='input-wrapper'>
         <div>
           <input required
             value={firstName}
@@ -80,6 +81,8 @@ export default function App() {
             onChange={(e) => setLastName(e.target.value)} placeholder='Last name'
           />
         </div>
+          </div>
+
         <div className='buttonClass'>
         <button onClick={handleOpen} style={{ backgroundColor: isSuccessful ? "rgb(114, 187, 6)" : "lightgrey" }} type="submit">Submit</button>
         <Modal
