@@ -63,7 +63,8 @@ export default function App() {
 
   // Rendera ett formulär och hälsningsmeddelande på sidan
   return (
-  
+<div>
+  <div className='header-logo'><img width="200px" src="/apendo.png"/></div>
     <div className='container'>
       <h1>Welcome! </h1>
       <form onSubmit={submit}>
@@ -97,6 +98,7 @@ export default function App() {
 </Modal>
         </div>
       </form>
+    </div>
     </div>
   );
 }

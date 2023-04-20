@@ -40,3 +40,8 @@ h1{
   margin-left: 10px;
   color: white;
 }
+
+.header-logo{
+text-align: right;
+margin: 20px;;
+}

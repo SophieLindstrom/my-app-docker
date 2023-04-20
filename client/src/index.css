@@ -4,13 +4,20 @@
   height: 100px;
   background: #555;
 }
+
+body, html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family:'Work Sans',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("https://media.licdn.com/dms/image/D4D12AQFEVumqSON_lg/article-cover_image-shrink_720_1280/0/1679404307689?e=2147483647&v=beta&t=yLU_55we3-rlnOE8Xr6YLVF6ypEofiy7kgrnwFaV6NU");
+  background-image: url('/public/Ada.png');
+  background-size: cover;
+  background-position: center center;
 }
 
 code {
