@@ -20,7 +20,7 @@ button{
 }
 
 input{
-  padding: 10px 20px;
+  padding: 10px 10px;
   margin: 8px 0;
   box-sizing: border-box;
   border-radius: 10px;
@@ -38,4 +38,5 @@ input:focus{
 
 h1{
   margin-left: 10px;
+  color: white;
 }
