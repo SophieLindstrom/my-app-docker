@@ -17,7 +17,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url('/public/Ada.png');
   background-size: cover;
-  background-position: center center;
+  background-position: right center;
 }
 
 code {
