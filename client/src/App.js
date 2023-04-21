@@ -54,7 +54,7 @@ export default function App() {
     // Extrahera svaret från servern som en JSON-sträng
     const json = await res.json();
 
-    //Sätt knappen till rosa när den klickas
+    //Sätt knappen till grön när den klickas
     setSuccessful((currentState) => true);
     // Uppdatera state-variabeln message med hälsningen från servern
     setMessages(json.message);
