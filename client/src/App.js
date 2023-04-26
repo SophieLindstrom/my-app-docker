@@ -1,7 +1,6 @@
 import './App.css';
 
-
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -17,19 +16,35 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 //Definiera komponenten som default export
 // Deklarera fyra stycken state-variabler med hjälp av useState-hooken
 export default function App() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [message, setMessages] = useState("");
-  const [isSuccessful, setSuccessful] = useState(false);
- 
-  
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSuccessfulUser, setSuccessfulUser] = useState(false);
+  const [isSuccessfulGuest, setSuccessfulGuest] = useState(false);
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleGuestClick = async () => {
+    const res = await fetch('http://localhost:4000/hello');
+
+    console.log("res", res);
+
+    if(res.ok){
+      const json = await res.json();
+      setSuccessfulGuest((currentState) => true);
+
+      console.log("mess", json);
+
+      setMessage(json.message);
+      handleOpen();
+    }
+  }
 
   // Deklarera en funktion som körs när användaren klickar på "Submit"-knappen
   const submit = async (e) => {
@@ -42,66 +57,111 @@ export default function App() {
     // Validera att förnamn och efternamn har fyllts i
     const formValid = encodedFirstName.length > 0 && encodedLastName.length > 0;
 
+    console.log("Här är vi");
+
     if (!formValid) {
-      return; // Om formuläret inte är korrekt ifyllt, avbryt
+     
+      return;
     }
 
-    
+    console.log("formvalid:", formValid);
 
     // Skicka en asynkron fetch-request till en lokal server på port 4000 med användarens namn som query string-parametrar i URL:en
-    const res = await fetch('http://localhost:4000/hello?firstName=' + encodedFirstName + '&lastName=' + encodedLastName);
 
     // Extrahera svaret från servern som en JSON-sträng
+
+    const res = await fetch('http://localhost:4000/hello', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ firstName, lastName }),
+    });
+
+    if (!res.ok) {
+      throw new Error('Något gick fel');
+    }
+
     const json = await res.json();
 
     //Sätt knappen till grön när den klickas
-    setSuccessful((currentState) => true);
+    setSuccessfulUser((currentState) => true);
+    
     // Uppdatera state-variabeln message med hälsningen från servern
-    setMessages(json.message);
+    setMessage(json.message);
 
+    handleOpen();
   };
 
   // Rendera ett formulär och hälsningsmeddelande på sidan
   return (
-<div>
-  <div className='header-logo'><img width="200px" src="/apendo.png"/></div>
-    <div className='container'>
-      <h1>Welcome! </h1>
-      <form onSubmit={submit}>
-        <div className='input-wrapper'>
-        <div>
-          <input required
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)} placeholder='First name'
-          />
-        </div>
-        <div>
-          <input required
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)} placeholder='Last name'
-          />
-        </div>
+    <div>
+      <div className="header-logo">
+        <img width="200px" src="/apendo.png" />
+      </div>
+      <div className="container">
+        <h1>Welcome! </h1>
+        <form onSubmit={submit}>
+          <div className="input-wrapper">
+            <div>
+              <input
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="First name"
+              />
+            </div>
+            <div>
+              <input
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Last name"
+              />
+            </div>
           </div>
 
-        <div className='buttonClass'>
-        <button onClick={handleOpen} style={{ backgroundColor: isSuccessful ? "rgb(114, 187, 6)" : "lightgrey" }} type="submit">Submit</button>
-        <Modal
-         open={open}
-         onClose={handleClose}
-         aria-labelledby="modal-modal-title"
-         aria-describedby="modal-modal-description">
-    <Box sx={style}>
-    <Typography id="modal-modal-title" variant="h6" component="h2">
-    {message}
-    </Typography>
-    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-    I am Ada, your Digital Assistant. How can I help you?
-    </Typography>
-  </Box>
-</Modal>
-        </div>
-      </form>
-    </div>
+          <div className="buttonClass">
+          <button
+          style={{
+            backgroundColor: isSuccessfulGuest
+              ? 'rgb(114, 187, 6)'
+              : 'lightgrey',
+          }}
+              onClick={() => {handleGuestClick()}}
+              type="button"
+            >
+              Guest
+            </button>
+            
+            <button
+              style={{
+                backgroundColor: isSuccessfulUser
+                  ? 'rgb(114, 187, 6)'
+                  : 'lightgrey',
+              }}
+              type="submit"
+            >
+              Submit
+            </button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  {message}
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  Jag heter Ada och är din personliga assistent. Hur kan jag hjälpa dig?
+                </Typography>
+              </Box>
+            </Modal>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

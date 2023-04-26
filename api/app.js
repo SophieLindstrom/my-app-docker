@@ -22,7 +22,7 @@ app.get('/hello', function(req, res){
   const lastName = req.query.lastName;
   res.setHeader('Content-Type', 'application/json');
 
-  const greeting = `Hello ${firstName} ${lastName} and welcome to Apendo!`;
+  const greeting = `Hej gästanvändare, och välkommen till Apendo!`;
 
   res.send(JSON.stringify({ message: greeting }));
 });
@@ -33,7 +33,7 @@ app.post('/hello', function(req, res){
   const lastName = req.body.lastName;
   res.setHeader('Content-Type', 'application/json');
 
-  const greeting = `Hello ${firstName} ${lastName} and welcome to Apendo!`;
+  const greeting = `Hej ${firstName} ${lastName}, och välkommen till Apendo!`;
 
   res.send(JSON.stringify({ message: greeting }));
 });
