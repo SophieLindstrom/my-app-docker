@@ -22,18 +22,33 @@ app.get('/hello', function(req, res){
   const lastName = req.query.lastName;
   res.setHeader('Content-Type', 'application/json');
 
-  // app.post('/hello', function(req, res){
-  //   console.log(req.body);
-  //   const firstName =  req.body.firstName;
-  //   const lastName = req.body.lastName;
-  //   res.setHeader('Content-Type', 'application/json');
-  //   res.send(JSON.stringify({ message: `Hello ${firstName} ${lastName}!` }));
-  // });
+  const greeting = `Hello ${firstName} ${lastName} and welcome to Apendo!`;
+
+  res.send(JSON.stringify({ message: greeting }));
+});
+
+app.post('/hello', function(req, res){
+  console.log(req.body);
+  const firstName =  req.body.firstName;
+  const lastName = req.body.lastName;
+  res.setHeader('Content-Type', 'application/json');
 
   const greeting = `Hello ${firstName} ${lastName} and welcome to Apendo!`;
 
   res.send(JSON.stringify({ message: greeting }));
 });
+
+app.put('/hello', function(req, res){
+  console.log(req.body);
+  const firstName =  req.body.firstName;
+  const lastName = req.body.lastName;
+  res.setHeader('Content-Type', 'application/json');
+
+  const greeting = `Hello ${firstName} ${lastName} and welcome to Apendo!`;
+
+  res.send(JSON.stringify({ message: greeting }));
+});
+
 
 app.listen(port, () =>
   console.log(`Server ts running on port ${port}, http://localhost:${port}`)
