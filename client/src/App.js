@@ -23,6 +23,7 @@ export default function App() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [message, setMessage] = useState('');
+  const [userId, setUserId] = useState('');
   const [isSuccessfulGuest, setSuccessfulGuest] = useState(false);
   const [isSuccessfulUser, setSuccessfulUser] = useState(false);
   const [isSuccessfulEdit, setSuccessfulEdit] = useState(false);
@@ -32,18 +33,19 @@ export default function App() {
   const handleClose = () => setOpen(false);
 
   const handleGuestClick = async () => {
-  const res = await fetch('http://localhost:4000/hello');
+  
+    const res = await fetch('http://localhost:4000/hello');
 
-    if(res.ok){
+    if (res.ok) {
       const json = await res.json();
       setSuccessfulGuest((currentState) => true);
 
-      console.log("mess", json);
+      console.log('mess', json);
 
       setMessage(json.message);
       handleOpen();
     }
-  }
+  };
 
   // Deklarera en funktion som körs när användaren klickar på "Submit"-knappen
   const submit = async (e) => {
@@ -56,13 +58,9 @@ export default function App() {
     // Validera att förnamn och efternamn har fyllts i
     const formValid = encodedFirstName.length > 0 && encodedLastName.length > 0;
 
-    
-
     if (!formValid) {
-     
       return;
     }
-
 
     // Skicka en asynkron fetch-request till en lokal server på port 4000 med användarens namn som query string-parametrar i URL:en
 
@@ -84,13 +82,14 @@ export default function App() {
 
     //Sätt knappen till grön när den klickas
     setSuccessfulUser((currentState) => true);
-    
+
     // Uppdatera state-variabeln message med hälsningen från servern
     setMessage(json.message);
+    setUserId(json.userId);
 
     handleOpen();
   };
-  
+
   // Deklarera en funktion som körs när användaren klickar på "Edit"-knappen
   const edit = async (e) => {
     e.preventDefault(); // Förhindra att formuläret skickas iväg och att sidan laddas om
@@ -102,48 +101,32 @@ export default function App() {
     // Validera att förnamn och efternamn har fyllts i
     const formValid = encodedFirstName.length > 0 && encodedLastName.length > 0;
 
-    
-
     if (!formValid) {
-     
       return;
     }
-  
-  const res = await fetch('http://localhost:4000/hello', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ firstName, lastName }),
-  });
 
-  if (!res.ok) {
-    throw new Error('Något gick fel');
-  }
+    const res = await fetch('http://localhost:4000/hello', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ firstName, lastName, userId }),
+    });
 
-  const json = await res.json();
-
-  //Sätt knappen till grön när den klickas
-  setSuccessfulEdit((currentState) => true);
-  
-  // Uppdatera state-variabeln message med hälsningen från servern
-  setMessage(json.message);
-
-  handleOpen();
-};
-const handleEditClick = async () => {
-  const res = await fetch('http://localhost:4000/hello');
-
-    if(res.ok){
-      const json = await res.json();
-      setSuccessfulEdit((currentState) => true);
-
-      console.log("mess", json);
-
-      setMessage(json.message);
-      handleOpen();
+    if (!res.ok) {
+      throw new Error('Något gick fel');
     }
-  }
+
+    const json = await res.json();
+
+    //Sätt knappen till grön när den klickas
+    setSuccessfulEdit((currentState) => true);
+
+    // Uppdatera state-variabeln message med hälsningen från servern
+    setMessage(json.message);
+
+    handleOpen();
+  };
 
   // Rendera ett formulär och hälsningsmeddelande på sidan
   return (
@@ -174,18 +157,20 @@ const handleEditClick = async () => {
           </div>
 
           <div className="buttonClass">
-          <button
-          style={{
-            backgroundColor: isSuccessfulGuest
-              ? 'rgb(114, 187, 6)'
-              : 'lightgrey',
-          }}
-              onClick={() => {handleGuestClick()}}
+            <button
+              style={{
+                backgroundColor: isSuccessfulGuest
+                  ? 'rgb(114, 187, 6)'
+                  : 'lightgrey',
+              }}
+              onClick={() => {
+                handleGuestClick();
+              }}
               type="button"
             >
               Guest
             </button>
-            
+
             <button
               style={{
                 backgroundColor: isSuccessfulUser
@@ -196,56 +181,57 @@ const handleEditClick = async () => {
             >
               Register
             </button>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  {message}
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Jag heter Ada och är din personliga assistent. Hur kan jag hjälpa dig?
-                </Typography>
-                
-            <form onSubmit={edit}>
-          <div className="input-wrapper">
-            <div>
-              <input
-                required
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                placeholder="First name"
-              />
-            </div>
-            <div>
-              <input
-                required
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                placeholder="Last name"
-              />
-            </div>
           </div>
-          <button
+        </form>
+      </div>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {message}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Jag heter Ada och är din personliga assistent. Hur kan jag hjälpa
+            dig?
+          </Typography>
+
+          <form onSubmit={edit}>
+            <div className="input-wrapper">
+              <div>
+                <input
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="First name"
+                />
+              </div>
+              <div>
+                <input
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Last name"
+                />
+              </div>
+            </div>
+            <button
               style={{
                 backgroundColor: isSuccessfulEdit
                   ? 'rgb(114, 187, 6)'
                   : 'lightgrey',
               }}
-              onClick={() => {handleEditClick()}}
-              type="edit"
+              type="submit"
             >
               Edit
             </button>
           </form>
-              </Box>
-            </Modal>
-          </div>
-        </form>
-      </div>
+        </Box>
+      </Modal>
     </div>
   );
-  }
+}

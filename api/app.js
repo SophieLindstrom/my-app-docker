@@ -39,32 +39,32 @@ app.post('/hello', function(req, res){
   const lastName = req.body.lastName;
   res.setHeader('Content-Type', 'application/json');
 
+
   db.run("INSERT INTO Register(firstName, lastName) VALUES (?,?)",[firstName, lastName], function (err) {
+
+    const greeting = `Hej ${firstName} ${lastName}, och välkommen till Apendo!`;
+
+    res.send(JSON.stringify({ message: greeting, userId: this.lastID }));
+
     if (err) {
       console.error(err.message);
     } 
   });
-  const greeting = `Hej ${firstName} ${lastName}, och välkommen till Apendo!`;
-
-  res.send(JSON.stringify({ message: greeting }));
-
 });
 
 app.put('/hello', function(req, res){
   console.log(req.body);
+  const userId = req.body.userId;
   const firstName =  req.body.firstName;
   const lastName = req.body.lastName;
   res.setHeader('Content-Type', 'application/json');
-  db.run("INSERT INTO Edit (firstName, lastName) VALUES (?,?)",[firstName, lastName], function (err) {
+
+  db.run("UPDATE Register SET firstName = ?, lastName = ? WHERE id = ?",[firstName, lastName, userId], function (err) {
     if (err) {
       console.error(err.message);
     } 
   });
-  // db.run("UPDATE Register (firstName, lastName) VALUES (?,?)",[firstName, lastName], function (err) {
-  //   if (err) {
-  //     console.error(err.message);
-  //   } 
-  // });
+  
 
   const greeting = `Hej ${firstName} ${lastName} du har nu ändrat ditt förnamn och efternamn, välkommen till Apendo!`;
 
