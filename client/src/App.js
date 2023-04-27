@@ -46,7 +46,7 @@ export default function App() {
   }
 
   // Deklarera en funktion som körs när användaren klickar på "Submit"-knappen
-  const register = async (e) => {
+  const submit = async (e) => {
     e.preventDefault(); // Förhindra att formuläret skickas iväg och att sidan laddas om
 
     // Ta bort tecken som inte går att skicka med callet
@@ -140,7 +140,7 @@ export default function App() {
       </div>
       <div className="container">
         <h1>Welcome! </h1>
-        <form onSubmit={register}>
+        <form onSubmit={submit}>
           <div className="input-wrapper">
             <div>
               <input
