@@ -209,7 +209,27 @@ const handleEditClick = async () => {
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   Jag heter Ada och är din personliga assistent. Hur kan jag hjälpa dig?
                 </Typography>
-                <button
+                
+            <form onSubmit={edit}>
+          <div className="input-wrapper">
+            <div>
+              <input
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="First name"
+              />
+            </div>
+            <div>
+              <input
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Last name"
+              />
+            </div>
+          </div>
+          <button
               style={{
                 backgroundColor: isSuccessfulEdit
                   ? 'rgb(114, 187, 6)'
@@ -220,6 +240,7 @@ const handleEditClick = async () => {
             >
               Edit
             </button>
+          </form>
               </Box>
             </Modal>
           </div>

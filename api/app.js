@@ -55,6 +55,16 @@ app.put('/hello', function(req, res){
   const firstName =  req.body.firstName;
   const lastName = req.body.lastName;
   res.setHeader('Content-Type', 'application/json');
+  db.run("INSERT INTO Edit (firstName, lastName) VALUES (?,?)",[firstName, lastName], function (err) {
+    if (err) {
+      console.error(err.message);
+    } 
+  });
+  // db.run("UPDATE Register (firstName, lastName) VALUES (?,?)",[firstName, lastName], function (err) {
+  //   if (err) {
+  //     console.error(err.message);
+  //   } 
+  // });
 
   const greeting = `Hej ${firstName} ${lastName} du har nu ändrat ditt förnamn och efternamn, välkommen till Apendo!`;
 
