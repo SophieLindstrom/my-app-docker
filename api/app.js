@@ -66,7 +66,7 @@ app.put('/hello', function(req, res){
   });
   
 
-  const greeting = `Hej ${firstName} ${lastName} du har nu ändrat ditt förnamn och efternamn, välkommen till Apendo!`;
+  const greeting = `Hej ${firstName} ${lastName}! Du har nu ändrat dina uppgifter, välkommen till Apendo!`;
 
   res.send(JSON.stringify({ message: greeting }));
 });

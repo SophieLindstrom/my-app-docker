@@ -27,6 +27,7 @@ export default function App() {
   const [isSuccessfulGuest, setSuccessfulGuest] = useState(false);
   const [isSuccessfulUser, setSuccessfulUser] = useState(false);
   const [isSuccessfulEdit, setSuccessfulEdit] = useState(false);
+  const [hasEdited, sethasEdited] = useState(false);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -124,8 +125,7 @@ export default function App() {
 
     // Uppdatera state-variabeln message med hälsningen från servern
     setMessage(json.message);
-
-    handleOpen();
+    sethasEdited(true);
   };
 
   // Rendera ett formulär och hälsningsmeddelande på sidan
@@ -135,15 +135,15 @@ export default function App() {
         <img width="200px" src="/apendo.png" />
       </div>
       <div className="container">
-        <h1>Welcome! </h1>
-        <form onSubmit={submit}>
+        <h1>Välkommen! </h1>
+        <form className='main-form' onSubmit={submit}>
           <div className="input-wrapper">
             <div>
               <input
                 required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                placeholder="First name"
+                placeholder="Förnamn"
               />
             </div>
             <div>
@@ -151,7 +151,7 @@ export default function App() {
                 required
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                placeholder="Last name"
+                placeholder="Efternamn"
               />
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function App() {
               }}
               type="button"
             >
-              Guest
+              Gäst
             </button>
 
             <button
@@ -179,7 +179,7 @@ export default function App() {
               }}
               type="register"
             >
-              Register
+              Registera dig
             </button>
           </div>
         </form>
@@ -195,11 +195,16 @@ export default function App() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {message}
           </Typography>
+          {!hasEdited &&(
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Jag heter Ada och är din personliga assistent. Hur kan jag hjälpa
             dig?
+          </Typography>)}
+          {userId && !hasEdited && (
+            <div>
+    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Ändra mina uppgifter
           </Typography>
-
           <form onSubmit={edit}>
             <div className="input-wrapper">
               <div>
@@ -207,7 +212,7 @@ export default function App() {
                   required
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="First name"
+                  placeholder="Förnamn"
                 />
               </div>
               <div>
@@ -215,7 +220,7 @@ export default function App() {
                   required
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Last name"
+                  placeholder="Efternamn"
                 />
               </div>
             </div>
@@ -227,9 +232,9 @@ export default function App() {
               }}
               type="submit"
             >
-              Edit
+              Redigera
             </button>
-          </form>
+          </form></div>)}
         </Box>
       </Modal>
     </div>
