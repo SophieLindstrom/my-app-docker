@@ -131,6 +131,19 @@ export default function App() {
 
   handleOpen();
 };
+const handleEditClick = async () => {
+  const res = await fetch('http://localhost:4000/hello');
+
+    if(res.ok){
+      const json = await res.json();
+      setSuccessfulEdit((currentState) => true);
+
+      console.log("mess", json);
+
+      setMessage(json.message);
+      handleOpen();
+    }
+  }
 
   // Rendera ett formulär och hälsningsmeddelande på sidan
   return (
@@ -183,16 +196,6 @@ export default function App() {
             >
               Register
             </button>
-            <button
-              style={{
-                backgroundColor: isSuccessfulEdit
-                  ? 'rgb(114, 187, 6)'
-                  : 'lightgrey',
-              }}
-              type="edit"
-            >
-              Edit
-            </button>
             <Modal
               open={open}
               onClose={handleClose}
@@ -206,6 +209,17 @@ export default function App() {
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   Jag heter Ada och är din personliga assistent. Hur kan jag hjälpa dig?
                 </Typography>
+                <button
+              style={{
+                backgroundColor: isSuccessfulEdit
+                  ? 'rgb(114, 187, 6)'
+                  : 'lightgrey',
+              }}
+              onClick={() => {handleEditClick()}}
+              type="edit"
+            >
+              Edit
+            </button>
               </Box>
             </Modal>
           </div>
@@ -213,4 +227,4 @@ export default function App() {
       </div>
     </div>
   );
-}
+  }
