@@ -18,8 +18,6 @@ app.get('/', (req, res) =>{
 
 app.get('/hello', function(req, res){
   console.log(req.query);
-  const firstName =  req.query.firstName;
-  const lastName = req.query.lastName;
   res.setHeader('Content-Type', 'application/json');
 
   const greeting = `Hej gästanvändare, och välkommen till Apendo!`;
