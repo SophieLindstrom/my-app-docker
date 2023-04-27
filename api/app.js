@@ -9,6 +9,14 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+const sqlite3 = require('sqlite3').verbose();
+// Skapa en anslutning till databasen
+const db = new sqlite3.Database('path/to/database.db', (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Connected to the database.');
+});
 
 const port = process.env.PORT || 4000;
 
@@ -31,9 +39,15 @@ app.post('/hello', function(req, res){
   const lastName = req.body.lastName;
   res.setHeader('Content-Type', 'application/json');
 
+  db.run("INSERT INTO Register(firstName, lastName) VALUES (?,?)",[firstName, lastName], function (err) {
+    if (err) {
+      console.error(err.message);
+    } 
+  });
   const greeting = `Hej ${firstName} ${lastName}, och välkommen till Apendo!`;
 
   res.send(JSON.stringify({ message: greeting }));
+
 });
 
 app.put('/hello', function(req, res){
