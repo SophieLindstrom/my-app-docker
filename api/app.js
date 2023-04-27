@@ -11,7 +11,7 @@ app.use((req, res, next) => {
 });
 const sqlite3 = require('sqlite3').verbose();
 // Skapa en anslutning till databasen
-const db = new sqlite3.Database('path/to/database.db', (err) => {
+const db = new sqlite3.Database('./db/database.db', (err) => {
   if (err) {
     console.error(err.message);
   }
