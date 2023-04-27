@@ -44,7 +44,7 @@ app.put('/hello', function(req, res){
   const lastName = req.body.lastName;
   res.setHeader('Content-Type', 'application/json');
 
-  const greeting = `Hello ${firstName} ${lastName} and welcome to Apendo!`;
+  const greeting = `Hej ${firstName} ${lastName} du har nu ändrat ditt förnamn och efternamn, välkommen till Apendo!`;
 
   res.send(JSON.stringify({ message: greeting }));
 });
