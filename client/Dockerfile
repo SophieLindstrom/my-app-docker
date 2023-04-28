@@ -7,6 +7,7 @@ COPY package.json .
 RUN npm install
 ENV CHOKIDAR_USEPOLLING=true
 ENV npm_config_cache=/tmp/npm/
+RUN sudo npm cache clean --force
 COPY . .
 
 EXPOSE 3000
