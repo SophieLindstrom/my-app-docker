@@ -179,7 +179,7 @@ export default function App() {
               }}
               type="register"
             >
-              Registera dig
+              Registrera dig
             </button>
           </div>
         </form>
@@ -232,7 +232,7 @@ export default function App() {
               }}
               type="submit"
             >
-              Redigera
+              Spara
             </button>
           </form></div>)}
         </Box>
